@@ -15,7 +15,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: Scaffold(
+    return  Scaffold(
       appBar: AppBar(
         title: Text("DSC Alzahr"),
         centerTitle: true,
@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
           InkWell(
             child: Text("Set Time And Date",style:TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 14),),
             onTap: (){
-_showDateTimeDialog().then((value) => snackBBar());
+_showDateTimeDialog(context).then((value) => snackBBar(context));
 //ScaffoldMessenger.of(context).showSnackBar(snackBar);
 //print("hellp");
 
@@ -68,7 +68,7 @@ _showDateTimeDialog().then((value) => snackBBar());
                 ),
               ),
               
-                ),
+                
             
             
             
@@ -76,34 +76,38 @@ _showDateTimeDialog().then((value) => snackBBar());
              }
             
             
-            Future <void> _showDateTimeDialog() async{
+            Future <void> _showDateTimeDialog(BuildContext context) async{
                 var datee = await showDatePicker(context: context, initialDate: DateTime(2000), firstDate: DateTime(2000), lastDate: DateTime(2022));
               datee.month;
               datee.day;
               datee.year;
               var d = datee.year.toString() + "-"+ datee.month.toString() +"-"+ datee.day.toString();
+               TimeOfDay  d2 = await showTimePicker(context: context, initialTime: TimeOfDay.now());
+                var d3 = d2.hour.toString() + "-"+d2.minute.toString();
               setState(() {
                 date = d;
+                timeeee = d3.toString();
               });
-              _showTimeDialog();
+            //  _showTimeDialog(context);
          
               
                 }
               
-             Future  <void> _showTimeDialog()async {
-                  var time = await showTimePicker(context: context, initialTime: TimeOfDay.now());
+           //  Future  <void> _showTimeDialog(BuildContext context)async {
+                //  var time = await showTimePicker(context: context, initialTime: TimeOfDay.now());
                   //print(time);
-                  setState(() {
-                    timeeee = time.toString();
-                  });
-                }
+                  //setState(() {
+                   // timeeee = time.toString();
+                 // });
+                //}
 
 
 
-  Widget snackBBar(){
+  Widget snackBBar(context){
     
-    final snackBar = SnackBar(content:
-    Text("Date : ",textAlign: TextAlign.center,
+   final snackBar = SnackBar(content:
+    Text("Date : ${date} \n "
+        "Time : ${timeeee.toString()}",textAlign: TextAlign.center,
     style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)
       ,backgroundColor: Colors.greenAccent);
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
