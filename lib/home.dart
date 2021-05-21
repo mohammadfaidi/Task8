@@ -10,7 +10,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
  var date ="";
  String timeeee = "";
-  final snackBar = SnackBar(content: Text('Yay! A SnackBar!'));
+//  final snackBar = SnackBar(content: Text('Yay! A SnackBar!'));
 
 
   @override
@@ -43,8 +43,9 @@ class _MyHomePageState extends State<MyHomePage> {
           InkWell(
             child: Text("Set Time And Date",style:TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 14),),
             onTap: (){
-_showDateTimeDialog();
-ScaffoldMessenger.of(context).showSnackBar(snackBar);
+_showDateTimeDialog().then((value) => snackBBar());
+//ScaffoldMessenger.of(context).showSnackBar(snackBar);
+//print("hellp");
 
 
             },
@@ -75,7 +76,7 @@ ScaffoldMessenger.of(context).showSnackBar(snackBar);
              }
             
             
-              void _showDateTimeDialog() async{
+            Future <void> _showDateTimeDialog() async{
                 var datee = await showDatePicker(context: context, initialDate: DateTime(2000), firstDate: DateTime(2000), lastDate: DateTime(2022));
               datee.month;
               datee.day;
@@ -89,15 +90,24 @@ ScaffoldMessenger.of(context).showSnackBar(snackBar);
               
                 }
               
-                void _showTimeDialog()async {
+             Future  <void> _showTimeDialog()async {
                   var time = await showTimePicker(context: context, initialTime: TimeOfDay.now());
-                  print(time);
+                  //print(time);
                   setState(() {
                     timeeee = time.toString();
                   });
                 }
 
 
+
+  Widget snackBBar(){
+    
+    final snackBar = SnackBar(content:
+    Text("Date : ",textAlign: TextAlign.center,
+    style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)
+      ,backgroundColor: Colors.greenAccent);
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
 
 }
 
