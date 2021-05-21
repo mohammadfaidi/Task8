@@ -11,6 +11,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
  var date ="";
  String timeeee = "";
+ final snackBar = SnackBar(content: Text('Yay! A SnackBar!'));
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +42,13 @@ class _MyHomePageState extends State<MyHomePage> {
           SizedBox(height:10),
           InkWell(
             child: Text("Set Time And Date",style:TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 14),),
-            onTap: _showDateTimeDialog
-         
-            ,
+            onTap: (){
+_showDateTimeDialog();
+ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+            },
+
+
                         splashColor: Colors.red,
                         ),
                       SizedBox(height:5),
@@ -52,6 +57,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       
             
                     ],
+            
+            
             
                   ),
                 
@@ -69,8 +76,12 @@ class _MyHomePageState extends State<MyHomePage> {
             
               void _showDateTimeDialog() async{
                 var datee = await showDatePicker(context: context, initialDate: DateTime(2000), firstDate: DateTime(2000), lastDate: DateTime(2022));
+              datee.month;
+              datee.day;
+              datee.year;
+              var d = datee.year.toString() + "-"+ datee.month.toString() +"-"+ datee.day.toString();
               setState(() {
-                date = datee.toString();
+                date = d;
               });
               _showTimeDialog();
          
