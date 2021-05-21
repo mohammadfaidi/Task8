@@ -1,6 +1,5 @@
-	
- 
 import 'package:flutter/material.dart';
+
 
 class MyHomePage extends StatefulWidget {
   
@@ -11,7 +10,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
  var date ="";
  String timeeee = "";
- final snackBar = SnackBar(content: Text('Yay! A SnackBar!'));
+  final snackBar = SnackBar(content: Text('Yay! A SnackBar!'));
+
 
   @override
   Widget build(BuildContext context) {
@@ -34,17 +34,18 @@ class _MyHomePageState extends State<MyHomePage> {
         children: <Widget>[
           Text("Date  Now:",style:TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 14),),
           SizedBox(height:10),
-          Text("$date",style:TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 14),),
+          Text("$date",style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 14),),
           SizedBox(height:10),
           Text("Time Now",style:TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 14),),
           SizedBox(height:10),
-          Text("$timeeee",style:TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 14),),
+          Text("$timeeee",style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 14),),
           SizedBox(height:10),
           InkWell(
             child: Text("Set Time And Date",style:TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 14),),
             onTap: (){
 _showDateTimeDialog();
 ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
 
             },
 
@@ -99,3 +100,4 @@ ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
 
 }
+
